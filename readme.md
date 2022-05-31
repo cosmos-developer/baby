@@ -1,6 +1,8 @@
 # baby
 **baby** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
 
+Inspired by Jacob Gadikian old blockchain project aimed at teaching Cosmos. Baby blockchain is intended as a guide for people to learn Cosmos.
+
 ## Get started
 
 ```
