@@ -105,6 +105,7 @@ import (
 const (
 	AccountAddressPrefix = "baby"
 	Name                 = "baby"
+	DefaultDenom         = "ubaby"
 )
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals
