@@ -1,6 +1,6 @@
 #!/bin/bash
 rm -rf $HOME/.baby/
-tmux kill-server
+killall screen
 
 # start a testnet
 babyd testnet --keyring-backend=test
@@ -46,9 +46,9 @@ cp $HOME/.baby/node0/config/genesis.json $HOME/.baby/node1/config/genesis.json
 cp $HOME/.baby/node0/config/genesis.json $HOME/.baby/node2/config/genesis.json
 
 echo "start all three validators"
-tmux new -s validator1 -d babyd start --home=$HOME/.baby/node0
-tmux new -s validator2 -d babyd start --home=$HOME/.baby/node1
-tmux new -s validator3 -d babyd start --home=$HOME/.baby/node2
+screen -S validator1 -d -m babyd start --home=$HOME/.baby/node0
+screen -S validator2 -d -m babyd start --home=$HOME/.baby/node1
+screen -S validator3 -d -m babyd start --home=$HOME/.baby/node2
 
 echo $(babyd keys show node0 -a --keyring-backend=test --home=$HOME/.baby/node0)
 echo $(babyd keys show node1 -a --keyring-backend=test --home=$HOME/.baby/node1)

@@ -16,11 +16,13 @@ Run with `./multinode-local-testnet.sh` (allow ~45 seconds to run, required slee
 
 ## Logs
 
-Validator1: `tmux a -t validator1`
+Validator1: `screen -r validator1`
 
-Validator2: `tmux a -t validator2`
+Validator2: `screen -r validator2`
 
-Validator3: `tmux a -t validator3`
+Validator3: `screen -r validator3`
+
+CTRL + A + D to detach
 
 ## Directories
 
