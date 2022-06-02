@@ -32,19 +32,21 @@ Validator3: `$HOME/.baby/validator3`
 
 ## Ports
 
-Validator1: `1317, 9090, 9091, 26658, 26657, 26656, 6060`
+"x, x, x, x, rpc, p2p, x"
 
-Validator2: `1316, 9088, 9089, 26655, 26654, 26653, 6061`
+Validator1: `1317, 9090, 9091, 26658, 50000, 40000, 6060`
 
-Validator3: `1315, 9086, 9087, 26652, 26651, 26650, 6062`
+Validator2: `1316, 9088, 9089, 26655, 50001, 40001, 6061`
+
+Validator3: `1315, 9086, 9087, 26652, 50002, 40002, 6062`
 
 Ensure to include the `--home` flag or `--node` flag when using a particular node.
 
 ## Examples
 
-Validator2: `babyd status --node "tcp://localhost:26654"`
+Validator2: `babyd status --node "tcp://localhost:50001"`
 
-Validator3: `babyd status --node "tcp://localhost:26651"`
+Validator3: `babyd status --node "tcp://localhost:50002"`
 
 or
 

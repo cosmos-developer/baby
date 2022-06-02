@@ -80,23 +80,21 @@ Example:
 			chainID, _ := cmd.Flags().GetString(flags.FlagChainID)
 			minGasPrices, _ := cmd.Flags().GetString(server.FlagMinGasPrices)
 			nodeDirPrefix, _ := cmd.Flags().GetString(flagNodeDirPrefix)
-			nodeDaemonHome, _ := cmd.Flags().GetString(flagNodeDaemonHome)
 			startingIPAddress, _ := cmd.Flags().GetString(flagStartingIPAddress)
 			numValidators, _ := cmd.Flags().GetInt(flagNumValidators)
 			algo, _ := cmd.Flags().GetString(flags.FlagKeyAlgorithm)
 
 			return InitTestnet(
 				clientCtx, cmd, config, mbm, genBalIterator, outputDir, chainID, minGasPrices,
-				nodeDirPrefix, nodeDaemonHome, startingIPAddress, keyringBackend, algo, numValidators,
+				nodeDirPrefix, startingIPAddress, keyringBackend, algo, numValidators,
 			)
 		},
 	}
 
-	cmd.Flags().Int(flagNumValidators, 4, "Number of validators to initialize the testnet with")
+	cmd.Flags().Int(flagNumValidators, 3, "Number of validators to initialize the testnet with")
 	cmd.Flags().StringP(flagOutputDir, "o", app.DefaultNodeHome, "Directory to store initialization data for the testnet")
 	cmd.Flags().String(flagNodeDirPrefix, "node", "Prefix the directory name for each node with (node results in node0, node1, ...)")
-	cmd.Flags().String(flagNodeDaemonHome, "babyd", "Home directory of the node's daemon configuration")
-	cmd.Flags().String(flagStartingIPAddress, "192.168.0.1", "Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...)")
+	cmd.Flags().String(flagStartingIPAddress, "0.0.0.0", "Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...)")
 	cmd.Flags().String(flags.FlagChainID, "", "genesis file chain-id, if left blank will be randomly created")
 	cmd.Flags().String(server.FlagMinGasPrices, fmt.Sprintf("0.000006%s", app.DefaultDenom), "Minimum gas prices to accept for transactions; All fees in a tx must meet this minimum (e.g. 0.01photino,0.001stake)")
 	cmd.Flags().String(flags.FlagKeyringBackend, flags.DefaultKeyringBackend, "Select keyring's backend (os|file|test)")
@@ -118,7 +116,6 @@ func InitTestnet(
 	chainID,
 	minGasPrices,
 	nodeDirPrefix,
-	nodeDaemonHome,
 	startingIPAddress,
 	keyringBackend,
 	algoStr string,
@@ -157,11 +154,12 @@ func InitTestnet(
 	// generate private keys, node IDs, and initial transactions
 	for i := 0; i < numValidators; i++ {
 		nodeDirName := fmt.Sprintf("%s%d", nodeDirPrefix, i)
-		nodeDir := filepath.Join(outputDir, nodeDirName, nodeDaemonHome)
+		nodeDir := filepath.Join(outputDir, nodeDirName)
 		gentxsDir := filepath.Join(outputDir, "gentxs")
 
 		nodeConfig.SetRoot(nodeDir)
-		nodeConfig.RPC.ListenAddress = "tcp://0.0.0.0:26657"
+		listen_rpc_port := 50000 + i
+		nodeConfig.RPC.ListenAddress = fmt.Sprintf("tcp://0.0.0.0:%d", listen_rpc_port)
 
 		if err := os.MkdirAll(filepath.Join(nodeDir, "config"), nodeDirPerm); err != nil {
 			_ = os.RemoveAll(outputDir)
@@ -169,8 +167,10 @@ func InitTestnet(
 		}
 
 		nodeConfig.Moniker = nodeDirName
+		listen_p2p_port := 40000 + i
+		nodeConfig.P2P.ListenAddress = fmt.Sprintf("tcp://0.0.0.0:%d", listen_p2p_port)
 
-		ip, err := getIP(i, startingIPAddress)
+		ip, err := getIP(0, startingIPAddress)
 		if err != nil {
 			_ = os.RemoveAll(outputDir)
 			return err
@@ -182,7 +182,7 @@ func InitTestnet(
 			return err
 		}
 
-		memo := fmt.Sprintf("%s@%s:26656", nodeIDs[i], ip)
+		memo := fmt.Sprintf("%s@%s:%d", nodeIDs[i], ip, listen_p2p_port)
 		genFiles = append(genFiles, nodeConfig.GenesisFile())
 
 		kb, err := keyring.New(sdk.KeyringServiceName(), keyringBackend, nodeDir, inBuf)
@@ -271,7 +271,7 @@ func InitTestnet(
 
 	err := collectGenFiles(
 		clientCtx, nodeConfig, chainID, nodeIDs, valPubKeys, numValidators,
-		outputDir, nodeDirPrefix, nodeDaemonHome, genBalIterator,
+		outputDir, nodeDirPrefix, genBalIterator,
 	)
 	if err != nil {
 		return err
@@ -322,6 +322,7 @@ func initGenFiles(
 	}
 
 	// generate empty genesis files for each validator and save
+
 	for i := 0; i < numValidators; i++ {
 		if err := genDoc.SaveAs(genFiles[i]); err != nil {
 			return err
@@ -333,7 +334,7 @@ func initGenFiles(
 func collectGenFiles(
 	clientCtx client.Context, nodeConfig *tmconfig.Config, chainID string,
 	nodeIDs []string, valPubKeys []cryptotypes.PubKey, numValidators int,
-	outputDir, nodeDirPrefix, nodeDaemonHome string, genBalIterator banktypes.GenesisBalancesIterator,
+	outputDir, nodeDirPrefix string, genBalIterator banktypes.GenesisBalancesIterator,
 ) error {
 
 	var appState json.RawMessage
@@ -341,11 +342,17 @@ func collectGenFiles(
 
 	for i := 0; i < numValidators; i++ {
 		nodeDirName := fmt.Sprintf("%s%d", nodeDirPrefix, i)
-		nodeDir := filepath.Join(outputDir, nodeDirName, nodeDaemonHome)
+		nodeDir := filepath.Join(outputDir, nodeDirName)
 		gentxsDir := filepath.Join(outputDir, "gentxs")
 		nodeConfig.Moniker = nodeDirName
 
 		nodeConfig.SetRoot(nodeDir)
+
+		listen_rpc_port := 50000 + i
+		nodeConfig.RPC.ListenAddress = fmt.Sprintf("tcp://0.0.0.0:%d", listen_rpc_port)
+
+		listen_p2p_port := 40000 + i
+		nodeConfig.P2P.ListenAddress = fmt.Sprintf("tcp://0.0.0.0:%d", listen_p2p_port)
 
 		nodeID, valPubKey := nodeIDs[i], valPubKeys[i]
 		initCfg := genutiltypes.NewInitConfig(chainID, gentxsDir, nodeID, valPubKey)
