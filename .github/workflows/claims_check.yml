@@ -1,2 +1,11 @@
 # This workflow will check if students have successfully written claim code
 
+name: Claim check workflow
+
+on:
+  pull_request:
+    branches:
+      - claims-homework
+
+jobs:
+  
