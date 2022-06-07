@@ -1,0 +1,37 @@
+name: ❓ Question ❓
+description: question related to course
+assignees: 
+  - nghuyenthevinh2000
+title: "Question: [Question title]"
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This question form helps:
+          1. people on asking question correctly to format for easier categorization
+          2. answerer can quickly identify which category they may know
+  - type: checkboxes
+    attributes:
+      label: Question tags for categorization
+      options:
+        - label: CLI
+        - label: Cosmos - SDK
+        - label: Cosmos JS
+        - label: CosmWasm
+        - label: CosmWasm JS
+        - label: Windows Environment
+        - label: Ubuntu Environment
+        - label: MacOS Environment
+  - type: textarea
+    attributes:
+      label: Description of bugs
+      value: |
+        # Problem description
+        * What is the error?
+        * What have you done?
+        # Picture
+        * picture of the error
+        # Additional information that may help in debugging
+    validations:
+      required: true
