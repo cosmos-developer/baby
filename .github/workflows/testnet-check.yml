@@ -1,0 +1,14 @@
+name: Testnet check
+
+on: 
+  - push
+
+jobs:
+  run-testnet-check:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout chain source code
+        run: actions/checkout@v3
+      - name: run deploy-testnet homework script
+        run: |
+          bash homework/deploy-testnet.sh
