@@ -19,16 +19,20 @@ cat $HOME/.baby/node0/config/genesis.json | jq '.app_state["mint"]["params"]["mi
 
 # change app.toml values
 
+# validator 1
+sed -i -E 's|swagger = false|swagger = true|g' $HOME/.baby/node0/config/app.toml
+
 # validator2
 sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1316|g' $HOME/.baby/node1/config/app.toml
 sed -i -E 's|0.0.0.0:9090|0.0.0.0:9088|g' $HOME/.baby/node1/config/app.toml
 sed -i -E 's|0.0.0.0:9091|0.0.0.0:9089|g' $HOME/.baby/node1/config/app.toml
+sed -i -E 's|swagger = false|swagger = true|g' $HOME/.baby/node1/config/app.toml
 
 # validator3
 sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1315|g' $HOME/.baby/node2/config/app.toml
 sed -i -E 's|0.0.0.0:9090|0.0.0.0:9086|g' $HOME/.baby/node2/config/app.toml
 sed -i -E 's|0.0.0.0:9091|0.0.0.0:9087|g' $HOME/.baby/node2/config/app.toml
-
+sed -i -E 's|swagger = false|swagger = true|g' $HOME/.baby/node2/config/app.toml
 
 # change config.toml values
 
