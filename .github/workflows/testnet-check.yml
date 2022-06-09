@@ -9,9 +9,12 @@ jobs:
     steps:
       - name: checkout chain source code
         uses: actions/checkout@v3
+      - name: setup go environment
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.16'
       - name: run deploy-testnet homework script
         run: |
-          echo "${HOME}/go/bin" >> $GITHUB_PATH
           bash scripts/test-node-deploy.sh --install
       - name: query baby
         run: babyd status --node tcp://0.0.0.0:2281
