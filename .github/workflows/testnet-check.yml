@@ -11,7 +11,6 @@ jobs:
         uses: actions/checkout@v3
       - name: run deploy-testnet homework script
         run: |
-          screen -S testnode -d -m bash homework/deploy-testnet.sh
-          screen -r testnode
-      - name: terminate screen
-        run: killall screen 2>/dev/null
+          bash scripts/test-node-deploy.sh --install
+      - name: query baby
+        run: babyd status --node tcp://0.0.0.0:2281
