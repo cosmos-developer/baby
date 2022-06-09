@@ -10,6 +10,8 @@ jobs:
       - name: checkout chain source code
         uses: actions/checkout@v3
       - name: run deploy-testnet homework script
-        run: screen -S testnode -d -m bash homework/deploy-testnet.sh
+        run: |
+          screen -S testnode -d -m bash homework/deploy-testnet.sh
+          screen -r testnode
       - name: terminate screen
-        run: killall screen
+        run: killall screen 2>/dev/null
