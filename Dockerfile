@@ -15,16 +15,10 @@ RUN make install
 RUN command -v babyd
 
 RUN chmod +x homework/deploy-testnet.sh
-RUN chmod +x -R scripts
 
 # rest server
-# EXPOSE 1350
-EXPOSE 1317
-# tendermint p2p
-# EXPOSE 26656
-EXPOSE 2280
+EXPOSE 1350
 # tendermint rpc
-# EXPOSE 1711
-EXPOSE 2281
+EXPOSE 1711
 
 CMD ["babyd", "version"]

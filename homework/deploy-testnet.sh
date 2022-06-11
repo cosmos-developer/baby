@@ -1,1 +1,3 @@
-echo "this is homework"
+#!/bin/bash
+
+# do it man :))))

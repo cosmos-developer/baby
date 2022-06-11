@@ -1,6 +1,8 @@
 # Specification for testnet
 Learners are expected to write a script in [deploy-testnet](/homework/deploy-testnet.sh) to deploy a testnet node with configuration as follow:
 
+Assuming that babyd binary is already installed
+
 1. rpc listen address: tcp://0.0.0.0:1711
 2. api listen address: tcp://0.0.0.0:1350
 3. two address with 1000000000 ubaby, one with 50000000 ubaby

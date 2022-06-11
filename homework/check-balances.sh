@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NODE_PORT="1317"
+NODE_PORT="1350"
 
 # query all accounts
 ALL_ACCOUNTS=$(curl -X GET "http://localhost:$NODE_PORT/cosmos/auth/v1beta1/accounts" -H  "accept: application/json" | jq ".accounts[] | select(.address | . != null) | .address" -r)
