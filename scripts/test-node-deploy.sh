@@ -46,6 +46,7 @@ fi
 
 # validate dependencies are installed
 command -v jq > /dev/null 2>&1 || { echo >&2 "jq not installed. More info: https://stedolan.github.io/jq/download/"; exit 1; }
+command -v toml > /dev/null 2>&1 || { echo >&2 "toml not installed. More info: https://github.com/mrijken/toml-cli"; exit 1; }
 
 # install babyd if not exist
 if [ $WILL_INSTALL -eq 0 ];
@@ -81,6 +82,10 @@ cat $HOME/.baby/config/genesis.json | jq '.app_state["mint"]["params"]["mint_den
 
 # Set gas limit in genesis
 # cat $HOME/.baby/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="10000000"' > $HOME/.baby/config/tmp_genesis.json && mv $HOME/.baby/config/tmp_genesis.json $HOME/.baby/config/genesis.json
+
+# enable rest server and swagger
+toml set --toml-path $HOME/.baby/config/app.toml api.swagger true
+toml set --toml-path $HOME/.baby/config/app.toml api.enable true
 
 # Allocate genesis accounts (cosmos formatted addresses)
 babyd add-genesis-account $KEY 1000000000000ubaby --keyring-backend $KEYRING

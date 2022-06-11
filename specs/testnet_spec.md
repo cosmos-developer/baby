@@ -9,6 +9,9 @@ Learners are expected to write a script in [deploy-testnet](/homework/deploy-tes
 github workflow will check:
 1. all 4 above criteria
 
+# workflow for ci
+1. a container will run script deploy-testnet.sh and deploy a node
+2. run steps to check point 3 and 4
 # What learners will do
 1. fork github.com/cosmos-developer/baby
 2. checkout branch testnet-check 

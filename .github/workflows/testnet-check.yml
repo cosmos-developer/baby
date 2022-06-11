@@ -1,0 +1,24 @@
+name: Testnet check
+
+on: 
+  push:
+    branches:
+      - testnet-check
+  pull_request:
+    branches:
+      - testnet-check
+
+jobs:
+  run-testnet-check:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout chain source code
+        uses: actions/checkout@v3
+      - name: setup go environment
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.18'
+      - name: Docker compose
+        run: docker-compose up -d
+      - name: check address balances
+        run: |
