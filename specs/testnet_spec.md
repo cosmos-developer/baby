@@ -1,5 +1,5 @@
 # Specification for testnet
-Learners are expected to write a script in [deploy-testnet](homework/deploy-testnet.sh) to deploy a testnet node with configuration as follow:
+Learners are expected to write a script in [deploy-testnet](/baby/homework/deploy-testnet.sh) to deploy a testnet node with configuration as follow:
 
 1. rpc listen address: tcp://0.0.0.0:1711
 2. api listen address: tcp://0.0.0.0:1350
@@ -12,5 +12,5 @@ github workflow will check:
 # What learners will do
 1. fork github.com/cosmos-developer/baby
 2. checkout branch testnet-check 
-3. write script in [deploy-testnet](homework/deploy-testnet.sh)
+3. write script in [deploy-testnet](/baby/homework/deploy-testnet.sh)
 4. make a pull request to github.com/cosmos-developer/baby of branch testnet-check
