@@ -3,8 +3,8 @@ services:
   node:
     build:
       context: .
-    command: bash homework/deploy-testnet.sh
+    command: bash scripts/test-node-deploy.sh --install
     ports:
-      - 1350:1350 # rest
-      - 26656:26656 # p2p
-      - 1711:1711 # rpc
+      - 1317:1317 # rest
+      - 2280:2280 # p2p
+      - 2281:2281 # rpc

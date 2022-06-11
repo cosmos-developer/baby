@@ -21,4 +21,14 @@ jobs:
       - name: Docker compose
         run: docker-compose up -d
       - name: check address balances
+        run: bash homework/check-balances.sh
+      - name: check chain id
         run: |
+          CHAIN_ID=babyd status --node tcp://localhost:2281 | jq ".NodeInfo.network" -r
+          if [ $CHAIN_ID == "toddler" ]
+          then 
+            echo "success: chain id is toddler"
+          else
+            echo "chain id is not toddler"
+            exit 1
+          fi
