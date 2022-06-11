@@ -1,7 +1,12 @@
 name: Testnet check
 
 on: 
-  - push
+  push:
+    branches:
+      - testnet-check
+  pull_request:
+    branches:
+      - testnet-check
 
 jobs:
   run-testnet-check:
@@ -12,9 +17,8 @@ jobs:
       - name: setup go environment
         uses: actions/setup-go@v3
         with:
-          go-version: '1.16'
-      - name: run deploy-testnet homework script
+          go-version: '1.18'
+      - name: Docker compose
+        run: docker-compose up -d
+      - name: check address balances
         run: |
-          bash scripts/test-node-deploy.sh --install
-      - name: query baby
-        run: babyd status --node tcp://0.0.0.0:2281

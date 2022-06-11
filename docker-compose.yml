@@ -1,0 +1,10 @@
+version: "3"
+services:
+  node:
+    build:
+      context: .
+    command: bash homework/deploy-testnet.sh
+    ports:
+      - 1350:1350 # rest
+      - 26656:26656 # p2p
+      - 1711:1711 # rpc

@@ -8,3 +8,6 @@ Learners are expected to write a script to deploy a testnet node with configurat
 
 github workflow will check:
 1. all 4 above criteria
+
+# workflow
+a container will run script deploy-testnet.sh and deploy a node
