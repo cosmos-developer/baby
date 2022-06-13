@@ -21,6 +21,6 @@ jobs:
       - name: Docker compose
         run: docker-compose up -d
       - name: check address balances
-        run: bash homework/check-balances.sh
+        run: chmod a+x ./homework/check-balances.sh
       - name: check chain id
-        run: bash homework/check-chain-id.sh
+        run: chmod a+x ./homework/check-chain-id.sh
