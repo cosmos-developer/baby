@@ -5,8 +5,9 @@
 VALIDATOR_1="gnad01"
 VALIDATOR_2="gnad02"
 VALIDATOR_3="gnad03"
-BALANCE="1000000000ubaby"
-CHAIN_ID="baby-gnad"
+BALANCE1="1000000000ubaby"
+BALANCE2="50000000ubaby"
+CHAIN_ID="toddler"
 KEY_RING="test"
 MONIKER="localtestnet"
 LOG_LEVEL="info"
@@ -35,10 +36,11 @@ cat $HOME/.baby/config/genesis.json | jq '.app_state["mint"]["params"]["mint_den
 # enable rest server and swagger
 sed -i -E 's|swagger = false|swagger = true|g' $HOME/.baby/config/app.toml
 sed -i -E 's|enable = false|enable = true|g' $HOME/.baby/config/app.toml
+sed -i -E 's|tcp://0.0.0.0:1317|tcp://0.0.0.0:1350|g' $HOME/.baby/config/app.toml
 
-babyd add-genesis-account $VALIDATOR_1 $BALANCE --keyring-backend $KEY_RING
-babyd add-genesis-account $VALIDATOR_2 $BALANCE --keyring-backend $KEY_RING
-babyd add-genesis-account $VALIDATOR_3 $BALANCE --keyring-backend $KEY_RING
+babyd add-genesis-account $VALIDATOR_1 $BALANCE1 --keyring-backend $KEY_RING
+babyd add-genesis-account $VALIDATOR_2 $BALANCE1 --keyring-backend $KEY_RING
+babyd add-genesis-account $VALIDATOR_3 $BALANCE2 --keyring-backend $KEY_RING
 
 
 # Sign genesis transaction
@@ -51,5 +53,5 @@ babyd collect-gentxs
 babyd validate-genesis
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-babyd start --pruning=nothing --log_level $LOG_LEVEL --minimum-gas-prices=0.0001ubaby --p2p.laddr tcp://0.0.0.0:2280 --rpc.laddr tcp://0.0.0.0:2281 --grpc.address 0.0.0.0:2282 --grpc-web.address 0.0.0.0:2283
+babyd start --pruning=nothing --log_level $LOG_LEVEL --minimum-gas-prices=0.0001ubaby --p2p.laddr tcp://0.0.0.0:2280 --rpc.laddr tcp://0.0.0.0:1711 --grpc.address 0.0.0.0:2282 --grpc-web.address 0.0.0.0:2283
 
