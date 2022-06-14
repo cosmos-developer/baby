@@ -2,7 +2,7 @@ FROM golang:1.18-alpine3.16
 
 RUN set -eux
 
-RUN apk add --no-cache bash git tini build-base linux-headers py3-pip jq
+RUN apk add --no-cache bash git tini build-base linux-headers py3-pip jq curl
 RUN pip install toml-cli
 
 WORKDIR /code
