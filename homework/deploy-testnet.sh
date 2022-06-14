@@ -12,7 +12,8 @@ ACCOUNT1="account1"
 ACCOUNT2="account2"
 ACCOUNT3="account3"
 
-
+rm -rf $HOME/.baby/
+killall screen
 
 # retrieve all args
 WILL_RECOVER=0
@@ -116,3 +117,22 @@ babyd keys list
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
 #rpc listen address: tcp://0.0.0.0:1711
 babyd start --pruning=nothing --log_level $LOGLEVEL --minimum-gas-prices=0.0001ubaby --p2p.laddr tcp://0.0.0.0:2280 --rpc.laddr tcp://0.0.0.0:1711 --grpc.address 0.0.0.0:2282 --grpc-web.address 0.0.0.0:2283
+
+#get addresses of main walle and accounts
+
+KEY_ADDRESS=$(babyd keys show $KEY -a)
+ACCOUNT1_ADDRESS=$(babyd keys show $ACCOUNT1 -a)
+ACCOUNT2_ADDRESS=$(babyd keys show $ACCOUNT2 -a)
+ACCOUNT3_ADDRESS=$(babyd keys show $ACCOUNT3 -a)
+
+#send tokens
+babyd tx bank send $KEY_ADDRESS $ACCOUNT1_ADDRESS 1000000000ubaby --chain-id $CHAINID --node tcp://0.0.0.0:1711 --gas auto --fees 10ubaby -y --keyring-backend=$KEYRING
+echo "Sending 1000000000ubaby to $ACCOUNT1_ADDRESS"
+sleep 5
+
+babyd tx bank send $KEY_ADDRESS $ACCOUNT2_ADDRESS 1000000000ubaby --chain-id $CHAINID --node tcp://0.0.0.0:1711 --gas auto --fees 10ubaby -y --keyring-backend=$KEYRING
+echo "Sending 1000000000ubaby to $ACCOUNT2_ADDRESS"
+sleep 5
+
+babyd tx bank send $KEY_ADDRESS $ACCOUNT3_ADDRESS 50000000ubaby --chain-id $CHAINID --node tcp://0.0.0.0:1711 --gas auto --fees 10ubaby -y --keyring-backend=$KEYRING
+echo "Sending 50000000ubaby to $ACCOUNT3_ADDRESS"
