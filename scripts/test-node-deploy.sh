@@ -64,7 +64,7 @@ babyd config chain-id $CHAINID
 # determine if user wants to recorver or create new
 if [ $WILL_RECOVER -eq 0 ];
 then
-    babyd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO
+    babyd keys add $VAVKEY --keyring-backend $KEYRING --algo $KEYALGO
 else
     babyd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --recover
 fi
