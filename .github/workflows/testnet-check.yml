@@ -11,6 +11,7 @@ on:
 jobs:
   run-testnet-check:
     runs-on: ubuntu-22.04
+    environment: testnet check
     steps:
       - name: setup go environment
         uses: actions/setup-go@v3
