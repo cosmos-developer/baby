@@ -12,12 +12,14 @@ jobs:
   run-testnet-check:
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout chain source code
-        uses: actions/checkout@v3
       - name: setup go environment
         uses: actions/setup-go@v3
         with:
           go-version: '1.18'
+      - name: retrieve pr code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Docker compose
         run: |
           docker-compose up -d
@@ -33,6 +35,8 @@ jobs:
       #   uses: jakejarvis/wait-action@master
       #   with:
       #     time: '60s'
+      - name: checkout chain source code
+        uses: actions/checkout@v3
       - name: check address balances
         run: |
           chmod a+x ./homework/check-balances.sh
