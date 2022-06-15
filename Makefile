@@ -82,3 +82,6 @@ all: install
 
 install: go.sum
 	go install -mod=readonly $(BUILD_FLAGS) ./...
+
+build:
+	go build $(BUILD_FLAGS) -o bin/babyd ./cmd/babyd
