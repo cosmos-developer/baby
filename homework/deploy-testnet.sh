@@ -1,7 +1,7 @@
 #!/bin/bash
-
 rm -rf $HOME/.baby/
 killall screen
+killall babyd
 
 KEY="test"
 KEYRING="test"
@@ -16,19 +16,12 @@ VALIDATOR_1="hieule1"
 VALIDATOR_2="hieule2"
 VALIDATOR_3="hieule3"
 
-
+# config chain
 babyd config keyring-backend $KEYRING
 babyd config chain-id $CHAINID
 
 # determine if user wants to recorver or create new
 babyd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO
-
-# init chain
-babyd init $MONIKER --chain-id $CHAINID
-
-# config chain
-babyd config keyring-backend $KEYRING
-babyd config chain-id $CHAINID
 
 # Initialize chain
 babyd init $MONIKER --chain-id $CHAINID
@@ -45,7 +38,7 @@ sed -i -E 's|swagger = false|swagger = true|g' $HOME/.baby/config/app.toml
 sed -i -E 's|enable = false|enable = true|g' $HOME/.baby/config/app.toml
 
 # Allocate genesis accounts (cosmos formatted addresses)
-babyd add-genesis-account $KEY 10000000000000000ubaby --keyring-backend $KEYRING
+babyd add-genesis-account $KEY 1000000000000000ubaby --keyring-backend $KEYRING
 
 # Sign genesis transaction
 babyd gentx $KEY 1000000ubaby --keyring-backend $KEYRING --chain-id $CHAINID
@@ -64,13 +57,15 @@ babyd keys list
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
 #rpc listen address: tcp://0.0.0.0:1711
-babyd start --pruning=nothing \
+screen -S validator1 -d -m babyd start --pruning=nothing \
     --log_level $LOGLEVEL \
     --minimum-gas-prices=0.0001ubaby \
-    --p2p.laddr tcp://0.0.0.0:1600 \
+    --p2p.laddr tcp://0.0.0.0:1700 \
     --rpc.laddr tcp://0.0.0.0:1711 \
-    --grpc.address 0.0.0.0:1601 \
-    --grpc-web.address 0.0.0.0:1602
+    --grpc.address 0.0.0.0:1701 \
+    --grpc-web.address 0.0.0.0:1702
+
+sleep 10
 
 #get addresses of main wallet and accounts
 KEY_ADDRESS=$(babyd keys show $KEY -a)
@@ -83,6 +78,11 @@ echo $VALIDATOR1_ADDRESS;
 echo $VALIDATOR2_ADDRESS;
 echo $VALIDATOR3_ADDRESS;
 
+babyd q bank balances $KEY_ADDRESS --node tcp://0.0.0.0:1711
+babyd q bank balances $VALIDATOR1_ADDRESS --node tcp://0.0.0.0:1711
+babyd q bank balances $VALIDATOR2_ADDRESS --node tcp://0.0.0.0:1711
+babyd q bank balances $VALIDATOR3_ADDRESS --node tcp://0.0.0.0:1711
+
 #Transmit tokens
 babyd tx bank send $KEY_ADDRESS $VALIDATOR1_ADDRESS $BALANCE_1 --chain-id $CHAINID --node tcp://0.0.0.0:1711 --gas auto --fees 10ubaby -y --keyring-backend=$KEYRING
 sleep 5
@@ -91,3 +91,10 @@ babyd tx bank send $KEY_ADDRESS $VALIDATOR2_ADDRESS $BALANCE_1 --chain-id $CHAIN
 sleep 5
 
 babyd tx bank send $KEY_ADDRESS $VALIDATOR3_ADDRESS $BALANCE_2 --chain-id $CHAINID --node tcp://0.0.0.0:1711 --gas auto --fees 10ubaby -y --keyring-backend=$KEYRING
+sleep 5
+
+sleep 10
+
+babyd q bank balances $VALIDATOR1_ADDRESS --node tcp://0.0.0.0:1711
+babyd q bank balances $VALIDATOR2_ADDRESS --node tcp://0.0.0.0:1711
+babyd q bank balances $VALIDATOR3_ADDRESS --node tcp://0.0.0.0:1711
