@@ -20,6 +20,10 @@ jobs:
           go-version: '1.18'
       - name: Docker compose
         run: docker-compose up -d
+      - name: Sleep
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '60s'
       - name: check address balances
         run: |
           chmod a+x ./homework/check-balances.sh
