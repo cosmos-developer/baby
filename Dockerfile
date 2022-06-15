@@ -1,20 +1,28 @@
-FROM golang:1.18-alpine3.16
+FROM golang:1.18-alpine3.16 AS go-builder
 
 RUN set -eux
 
-RUN apk add --no-cache bash git tini build-base linux-headers py3-pip jq
-RUN pip install toml-cli
+RUN apk add --no-cache ca-certificates git build-base linux-headers
 
 WORKDIR /code
 COPY . /code/
 
 # Install babyd binary
 RUN echo "Installing babyd binary"
-RUN make install
-# Check if babyd is installed
-RUN command -v babyd
+RUN make build
 
-RUN chmod +x homework/deploy-testnet.sh
+#-------------------------------------------
+FROM alpine:3.16
+
+RUN apk add --no-cache bash py3-pip jq curl
+RUN pip install toml-cli
+
+COPY --from=go-builder /code/bin/babyd /usr/bin/babyd
+
+COPY homework/* /opt/
+RUN chmod +x /opt/*.sh
+
+WORKDIR /opt
 
 # rest server
 EXPOSE 1350
