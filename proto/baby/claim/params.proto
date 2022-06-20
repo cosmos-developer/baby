@@ -1,5 +1,5 @@
 syntax = "proto3";
-package cosmosdeveloper.baby.claim;
+package baby.claim;
 
 import "gogoproto/gogo.proto";
 

@@ -1,8 +1,8 @@
 syntax = "proto3";
-package cosmosdeveloper.baby.claim;
+package baby.claim;
 
 import "gogoproto/gogo.proto";
-import "claim/params.proto";
+import "baby/claim/params.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/cosmos-developer/baby/x/claim/types";
