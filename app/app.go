@@ -102,7 +102,10 @@ import (
 	claimmodule "github.com/cosmos-developer/baby/x/claim"
 	claimmodulekeeper "github.com/cosmos-developer/baby/x/claim/keeper"
 	claimmoduletypes "github.com/cosmos-developer/baby/x/claim/types"
-	// this line is used by starport scaffolding # stargate/app/moduleImport
+	templatemodule "github.com/cosmos-developer/baby/x/template"
+		templatemodulekeeper "github.com/cosmos-developer/baby/x/template/keeper"
+		templatemoduletypes "github.com/cosmos-developer/baby/x/template/types"
+// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
 const (
@@ -158,7 +161,8 @@ var (
 		vesting.AppModuleBasic{},
 		monitoringp.AppModuleBasic{},
 		claimmodule.AppModuleBasic{},
-		// this line is used by starport scaffolding # stargate/app/moduleBasic
+		templatemodule.AppModuleBasic{},
+// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
 	// module account permissions
@@ -231,7 +235,9 @@ type App struct {
 	ScopedMonitoringKeeper capabilitykeeper.ScopedKeeper
 
 	ClaimKeeper claimmodulekeeper.Keeper
-	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
+	
+		TemplateKeeper templatemodulekeeper.Keeper
+// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
 	mm *module.Manager
@@ -268,7 +274,8 @@ func New(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey, monitoringptypes.StoreKey,
 		claimmoduletypes.StoreKey,
-		// this line is used by starport scaffolding # stargate/app/storeKey
+		templatemoduletypes.StoreKey,
+// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -394,7 +401,17 @@ func New(
 	)
 	claimModule := claimmodule.NewAppModule(appCodec, app.ClaimKeeper, app.AccountKeeper, app.BankKeeper)
 
-	// this line is used by starport scaffolding # stargate/app/keeperDefinition
+	
+		app.TemplateKeeper = *templatemodulekeeper.NewKeeper(
+			appCodec,
+			keys[templatemoduletypes.StoreKey],
+			keys[templatemoduletypes.MemStoreKey],
+			app.GetSubspace(templatemoduletypes.ModuleName),
+			
+			)
+		templateModule := templatemodule.NewAppModule(appCodec, app.TemplateKeeper, app.AccountKeeper, app.BankKeeper)
+
+		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := ibcporttypes.NewRouter()
@@ -436,7 +453,8 @@ func New(
 		transferModule,
 		monitoringModule,
 		claimModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
+		templateModule,
+// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -464,7 +482,8 @@ func New(
 		paramstypes.ModuleName,
 		monitoringptypes.ModuleName,
 		claimmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/beginBlockers
+		templatemoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
 	app.mm.SetOrderEndBlockers(
@@ -488,7 +507,8 @@ func New(
 		ibctransfertypes.ModuleName,
 		monitoringptypes.ModuleName,
 		claimmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/endBlockers
+		templatemoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -517,7 +537,8 @@ func New(
 		feegrant.ModuleName,
 		monitoringptypes.ModuleName,
 		claimmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/initGenesis
+		templatemoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
@@ -542,7 +563,8 @@ func New(
 		transferModule,
 		monitoringModule,
 		claimModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
+		templateModule,
+// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
 
@@ -732,7 +754,8 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(monitoringptypes.ModuleName)
 	paramsKeeper.Subspace(claimmoduletypes.ModuleName)
-	// this line is used by starport scaffolding # stargate/app/paramSubspace
+	paramsKeeper.Subspace(templatemoduletypes.ModuleName)
+// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
 }

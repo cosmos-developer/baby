@@ -1,0 +1,25 @@
+syntax = "proto3";
+package baby.template;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/cosmos-developer/baby/x/template/types";
+
+// Msg defines the Msg service.
+service Msg {
+    // Comply with lint rule of COMMENTS in buf.yaml
+    // Template is a template rpc service
+    rpc Template(MsgTemplateRequest) returns (MsgTemplateResponse);
+}
+
+// Comply with lint rule of COMMENTS in buf.yaml
+// Request for template rpc service
+message MsgTemplateRequest{
+
+}
+
+// Comply with lint rule of COMMENTS in buf.yaml
+// Response for template rpc service
+message MsgTemplateResponse{
+
+}

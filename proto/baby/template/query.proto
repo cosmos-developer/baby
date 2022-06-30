@@ -1,0 +1,32 @@
+syntax = "proto3";
+package baby.template;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "baby/template/params.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/cosmos-developer/baby/x/template/types";
+
+// Query defines the gRPC querier service.
+service Query {  
+  // Comply with lint rule of COMMENTS in buf.yaml
+  // Template is a query template rpc service
+  rpc Template(QueryTemplateRequest) returns (QueryTemplateResponse) {
+    option (google.api.http).get = "/cosmos-developer/baby/template/template/{field}";
+  };
+}
+
+// Comply with lint rule of COMMENTS in buf.yaml
+// QueryTemplateRequest is request of Template query service
+message QueryTemplateRequest {
+  uint64 field = 1;
+}
+
+// Comply with lint rule of COMMENTS in buf.yaml
+// QueryTemplateResponse is response of Template query service
+message QueryTemplateResponse {
+  uint64 field = 1;
+  string field_1 = 2;
+}
