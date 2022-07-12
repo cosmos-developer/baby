@@ -1,6 +1,8 @@
 package keeper
 
 import (
+	"context"
+
 	"github.com/cosmos-developer/baby/x/template/types"
 )
 
@@ -15,3 +17,7 @@ func NewMsgServerImpl(keeper Keeper) types.MsgServer {
 }
 
 var _ types.MsgServer = msgServer{}
+
+func (server msgServer) Template(goCtx context.Context, msg *types.MsgTemplateRequest) (*types.MsgTemplateResponse, error) {
+	return &types.MsgTemplateResponse{}, nil
+}
