@@ -86,6 +86,7 @@ cat $HOME/.baby/config/genesis.json | jq '.app_state["mint"]["params"]["mint_den
 # enable rest server and swagger
 toml set --toml-path $HOME/.baby/config/app.toml api.swagger true
 toml set --toml-path $HOME/.baby/config/app.toml api.enable true
+toml set --toml-path $HOME/.baby/config/app.toml api.address tcp://0.0.0.0:1310
 
 # Allocate genesis accounts (cosmos formatted addresses)
 babyd add-genesis-account $KEY 1000000000000ubaby --keyring-backend $KEYRING
