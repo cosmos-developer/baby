@@ -54,4 +54,4 @@ babyd collect-gentxs
 babyd validate-genesis
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-babyd start --pruning=nothing --log_level $LOGLEVEL --minimum-gas-prices=0.0001ubaby --rpc.laddr tcp://0.0.0.0:1711
+babyd start --pruning=nothing --log_level $LOGLEVEL --minimum-gas-prices=0.0001ubaby --rpc.laddr tcp://localhost:1711
