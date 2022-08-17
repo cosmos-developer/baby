@@ -1,0 +1,44 @@
+await window.keplr.experimentalSuggestChain({
+    chainId: "baby-1",
+    chainName: "BABY",
+    rpc: "http://localhost:2281",
+    rest: "http://localhost:1310",
+    bip44: {
+        coinType: 118,
+    },
+    bech32Config: {
+        bech32PrefixAccAddr: "baby",
+        bech32PrefixAccPub: "baby" + "pub",
+        bech32PrefixValAddr: "baby" + "valoper",
+        bech32PrefixValPub: "baby" + "valoperpub",
+        bech32PrefixConsAddr: "baby" + "valcons",
+        bech32PrefixConsPub: "baby" + "valconspub",
+    },
+    currencies: [ 
+        { 
+            coinDenom: "BABY", 
+            coinMinimalDenom: "ubaby", 
+            coinDecimals: 6, 
+            coinGeckoId: "temp", 
+        }, 
+    ],
+    feeCurrencies: [
+        {
+            coinDenom: "BABY",
+            coinMinimalDenom: "ubaby",
+            coinDecimals: 6,
+            coinGeckoId: "temp",
+        },
+    ],
+    stakeCurrency: {
+        coinDenom: "BABY",
+        coinMinimalDenom: "ubaby",
+        coinDecimals: 6,
+        coinGeckoId: "temp",
+    },
+    gasPriceStep: {
+        low: 0.01,
+        average: 0.025,
+        high: 0.03,
+    },
+});

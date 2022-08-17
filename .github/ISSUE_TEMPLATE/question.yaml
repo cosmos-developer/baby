@@ -16,6 +16,7 @@ body:
       label: Question tags for categorization
       options:
         - label: CLI
+        - label: Protobuf + gRPC
         - label: Cosmos - SDK
         - label: Cosmos JS
         - label: CosmWasm

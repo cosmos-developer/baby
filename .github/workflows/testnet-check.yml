@@ -1,17 +1,13 @@
 name: Testnet check
 
-on: 
-  push:
-    branches:
-      - testnet-check
+on:
   pull_request:
     branches:
       - testnet-check
 
 jobs:
   run-testnet-check:
-    runs-on: ubuntu-22.04
-    environment: testnet check
+    runs-on: ubuntu-latest
     steps:
       - name: setup go environment
         uses: actions/setup-go@v3
@@ -26,18 +22,6 @@ jobs:
           docker-compose up -d
           docker container rename baby_node_1 baby-node-1
           docker exec baby-node-1 babyd version
-      # - name: Setup tunnel
-      #   uses: joshlarsen/ssh-tunnel-action@v1.2
-      #   with:
-      #     timeout: 1h
-      #     ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-      #     ngrok_token: ${{ secrets.NGROK_TOKEN }}
-      - name: Sleep
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '60s'
-      - name: checkout chain source code
-        uses: actions/checkout@v3
       - name: check address balances
         run: |
           chmod a+x ./homework/check-balances.sh

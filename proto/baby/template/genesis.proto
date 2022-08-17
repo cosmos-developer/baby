@@ -1,13 +1,13 @@
 syntax = "proto3";
-package cosmosdeveloper.baby.claim;
+package baby.template;
 
 import "gogoproto/gogo.proto";
-import "claim/params.proto";
+import "baby/template/params.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
-option go_package = "github.com/cosmos-developer/baby/x/claim/types";
+option go_package = "github.com/cosmos-developer/baby/x/template/types";
 
-// GenesisState defines the claim module's genesis state.
+// GenesisState defines the template module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
