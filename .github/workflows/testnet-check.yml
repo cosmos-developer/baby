@@ -1,9 +1,6 @@
 name: Testnet check
 
-on: 
-  push:
-    branches:
-      - testnet-check
+on:
   pull_request:
     branches:
       - testnet-check
