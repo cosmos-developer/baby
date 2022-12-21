@@ -71,4 +71,4 @@ https://youtu.be/9a3Xq8VDW3Y
 2. Make it run
 3. Post picture of your chain running. The result should be like so:
 
-![result](docs/chapter_1/images/1_1.png)
+![result](images/1_1.png "result of a chain running")
