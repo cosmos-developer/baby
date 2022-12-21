@@ -1,6 +1,6 @@
 Goal: 
-* I want people to understand how to interact with Tendermint node
-* I want people to further explore how to interact with Tendermint
+* Learners should understand how to interact with Tendermint node
+* Learners should be able to scaffold and start a chain
 
 # Lesson 1: Scaffolding and starting a chain
 
@@ -65,3 +65,10 @@ Should only use Ignite CLI for scaffolding chain
 ## Help videos
 https://youtu.be/SD6uXUMvB3c
 https://youtu.be/9a3Xq8VDW3Y
+
+## Homework
+1. Start a chain
+2. Make it run
+3. Post picture of your chain running. The result should be like so:
+
+![result](docs/chapter_1/images/1_1.png)
