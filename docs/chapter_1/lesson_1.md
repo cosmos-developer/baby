@@ -72,3 +72,5 @@ https://youtu.be/9a3Xq8VDW3Y
 3. Post picture of your chain running. The result should be like so:
 
 ![result](images/1_1.png "result of a chain running")
+
+4. For quick node deploy: bash scripts/test-node-deploy.sh
