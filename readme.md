@@ -23,7 +23,7 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 
 - [Lesson 2: Keyring](docs/chapter_2/lesson_2.md)
 - [Lesson 3: Making a transaction through CLI](docs/chapter_2/lesson_3.md)
-- Lesson 4: Making a query through CLI
+- [Lesson 4: Making a query through CLI](docs/chapter_2/lesson_4.md)
 - Lesson 5: Monitoring your node (version, status)
 
 3. Group 3: Interacting with a chain through API
