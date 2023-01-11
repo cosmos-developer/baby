@@ -4,7 +4,6 @@ Goal:
 
 # Lesson 4: Making a query through CLI
 
-
 ## Guidelines
 Query helps you to query information on chain or for debugging
 
