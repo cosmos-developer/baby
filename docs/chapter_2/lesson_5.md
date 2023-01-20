@@ -1,29 +1,41 @@
 Goal:
-* Learners should understand how to monitor vital information of a node
+* Learners should understand how to create and query balances
+* Learners should know how to query in general
 
-# Lesson 5: Monitoring your node (version, status)
-
-Use:
-* "babyd status --help" 
-* "babyd version --help"
-
-to learn more
+# Lesson 5: Making a query through CLI
 
 ## Guidelines
-Monitoring node and version is extremely important for coordination in testnet and mainnet.
-* binary version mismatched among validators can lead to consensus break
-* a dead node will lead to 10% slashing of delegation (lose big chunk of money)
+Query helps you to query information on chain or for debugging
 
-1. start a baby node
-2. babyd status --node tcp://localhost:2281
-3. babyd version
+Use "babyd q bank balances --help" to learn more
+
+Useful flags
+* --output (-o): Output format (text|json) (default "text")
+* --node: <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+
+1. bank
+* babyd q bank balances {} --node tcp://0.0.0.0:2281
+* babyd q bank balances {} --node tcp://0.0.0.0:2281 -o json
+2. tx
+* babyd q tx {} --node tcp://0.0.0.0:2281
+
+# Using json output in script
+1. babyd q bank balances {} --node tcp://0.0.0.0:2281 -o json | jq ".balances[0]"
+    * jq is a favourite tool for handling json
 
 ## Help videos
-https://youtu.be/RW4gZ7O7oPg
+https://youtu.be/iC1Ca5JFnx4
 
 ## Homework
+1. create a new key "test1"
+2. make a bank send transaction from key "test" to "test1"
 
-1. get status of a running baby node
-2. use jq to get id in NodeInfo
+![res1](images/query_make_tx.png)
 
-![pic](images/node_info_id.png)
+3. query tx of that bank transaction and get raw_log
+
+![res2](images/query_tx_get_raw_log.png)
+
+4. query balances of "test1" to make sure that it has received funds
+
+![res3](images/query_bank_bal.png)

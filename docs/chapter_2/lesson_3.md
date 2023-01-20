@@ -1,36 +1,47 @@
-Goal:
-* Learners should understand how to create and submit a simple transfer transaction
-* Learners should know how to make an arbitrary transaction
+Goal: 
+* Learners should understand how to create a keyring
+* Learners should understand how to store a keyring in difference places
 
-# Lesson 3: Making a transaction through CLI
+# Lesson 3: Keyring
+
+An user needs a blockchain address to:
+* store their crypto asset
+* sign transaction
+
+Keyring is where accounts are stored on CLI
+* single account (baby14567...) (scope of this video)
+* multisig account (self - exploration)
+
+Keyring backend storage exact location is determined by:
+* flag --keyring-backend: the place where addresses will be stored
+    * os: it may require you to type in password
+* flag --home: the place where keyring will be stored
+
+"--home" and "--keyring-backend" will be important for setting up multiple validator nodes to test on local machine. Please refer to this file for example: [start-local-testnet.sh](../../scripts/start-local-testnet.sh)
+
+If you config wrong --keyring-backend and --home, it will lead to key not found.
 
 ## Guidelines
-Transaction is the only way you can commit actions on the chain.
+1. add
+* new: babyd keys add new test-key to backend
+* recover: babyd keys add test-key --recover (read help on flag "--recover")
+* for more help information: babyd keys add --help
+2. delete: babyd keys delete test-key
+3. list: babyd keys list
+4. show
+* address: babyd keys show test-key -a
+* pubkey: babyd keys show test-key -p
+* address vs pubkey: https://www.youtube.com/watch?v=Pq8gNbvfaoM
 
-Use "babyd tx bank send --help" to learn more
-
-1. Important flags:
-* node: <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-* from: name or address of private key with which to sign
-* gas: gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-* fees: Fees to pay along with transaction; eg: 10uatom
-* chain-id: The network chain ID
-
-2. Nice-to-know flags:
-* yes (-y): Skip tx broadcasting prompt confirmation
-
-3. Example: bank transaction
-* babyd tx bank send {} {} 1000000ubaby --chain-id baby-1 --node tcp://localhost:2281 --gas auto --fees 10ubaby -y --keyring-backend test
-* (will explain query in next video) babyd q bank balances {}
+![image](images/pub_addr.png)
 
 ## Help videos
-* https://www.youtube.com/watch?v=8k5PpLndpEo
+1. https://youtu.be/QUXToHMl65A
 
 ## Homework
-* try to make a transfer transaction
+1. add key "test" to keyring-backend test
+2. query key "test" from keyring-backend os (should found nothing)
+3. add key "test" to home ["homework/keyring-homework"](../../homework/keyring-homework/placeholder.md) with keyring-backend test
+4. query key "test" from home ["homework/keyring-homework"] with keyring-backend test
 
-![transfer](./images/transfer.png)
-
-* use "--help", try to delegate to a validator (babyd tx staking --help)
-
-![stake](./images/stake.png)
+![result](images/keyring-hw.png)

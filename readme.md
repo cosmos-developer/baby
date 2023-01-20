@@ -18,24 +18,24 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 1. Group 1: Starting a chain
 
 - [Lesson 1: Scaffolding and starting a chain](docs/chapter_1/lesson_1.md)
+- [Lesson 2: Configuration of node ports](docs/chapter_1/lesson_2.md)
 
 2. Group 2: Interacting with a chain through cli
 
-- [Lesson 2: Keyring](docs/chapter_2/lesson_2.md)
-- [Lesson 3: Making a transaction through CLI](docs/chapter_2/lesson_3.md)
-- [Lesson 4: Making a query through CLI](docs/chapter_2/lesson_4.md)
-- [Lesson 5: Monitoring your node (version, status)](docs/chapter_2/lesson_5.md)
+- [Lesson 3: Keyring](docs/chapter_2/lesson_3.md)
+- [Lesson 4: Making a transaction through CLI](docs/chapter_2/lesson_4.md)
+- [Lesson 5: Making a query through CLI](docs/chapter_2/lesson_5.md)
+- [Lesson 6: Monitoring your node (version, status)](docs/chapter_2/lesson_6.md)
 
 3. Group 3: Interacting with a chain through API
 
-- Lesson 6: Making a transaction through API
-- Lesson 7: Making a query through API
+- Lesson 7: Making a transaction through API
+- Lesson 8: Making a query through API
 
 4. Group 4: Chain configuration
 
-- Lesson 8: Introduction to app.toml
-- Lesson 9: Introduction to client.toml and "chaind config"
-- Lesson 10: Configuration of chain ports
+- Lesson 9: Introduction to app.toml
+- Lesson 10: Introduction to client.toml and "chaind config"
 - Lesson 11: Introduction to genesis.json (genesis_time, chain_id, app_state)
 - Lesson 12: Dive deeper into app_state module configuration (auth, bank, gov)
 - Lesson 13: Dive deeper into app_state module configuration (mint, staking, vesting)

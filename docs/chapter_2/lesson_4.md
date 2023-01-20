@@ -1,41 +1,36 @@
 Goal:
-* Learners should understand how to create and query balances
-* Learners should know how to query in general
+* Learners should understand how to create and submit a simple transfer transaction
+* Learners should know how to make an arbitrary transaction
 
-# Lesson 4: Making a query through CLI
+# Lesson 4: Making a transaction through CLI
 
 ## Guidelines
-Query helps you to query information on chain or for debugging
+Transaction is the only way you can commit actions on the chain.
 
-Use "babyd q bank balances --help" to learn more
+Use "babyd tx bank send --help" to learn more
 
-Useful flags
-* --output (-o): Output format (text|json) (default "text")
-* --node: <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+1. Important flags:
+* node: <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+* from: name or address of private key with which to sign
+* gas: gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+* fees: Fees to pay along with transaction; eg: 10uatom
+* chain-id: The network chain ID
 
-1. bank
- * babyd q bank balances {} --node tcp://0.0.0.0:50000
- * babyd q bank balances {} --node tcp://0.0.0.0:50000 -o json
-2. tx
- * babyd q tx {} --node tcp://0.0.0.0:50000
+2. Nice-to-know flags:
+* yes (-y): Skip tx broadcasting prompt confirmation
 
-# Using json output in script
-1. babyd q bank balances {} --node tcp://0.0.0.0:50000 -o json | jq ".balances[0]"
-    * jq is a favourite tool for handling json
+3. Example: bank transaction
+* babyd tx bank send {} {} 1000000ubaby --chain-id baby-1 --node tcp://localhost:2281 --gas auto --fees 10ubaby -y --keyring-backend test
+* (will explain query in next video) babyd q bank balances {}
 
 ## Help videos
-https://youtu.be/iC1Ca5JFnx4
+* https://www.youtube.com/watch?v=8k5PpLndpEo
 
 ## Homework
-1. create a new key "test1"
-2. make a bank send transaction from key "test" to "test1"
+* try to make a transfer transaction
 
-![res1](images/query_make_tx.png)
+![transfer](./images/transfer.png)
 
-3. query tx of that bank transaction and get raw_log
+* use "--help", try to delegate to a validator (babyd tx staking --help)
 
-![res2](images/query_tx_get_raw_log.png)
-
-4. query balances of "test1" to make sure that it has received funds
-
-![res3](images/query_bank_bal.png)
+![stake](./images/stake.png)
