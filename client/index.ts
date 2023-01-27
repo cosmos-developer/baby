@@ -55,8 +55,10 @@ async function sendTransaction ({ to, amount, mnemonic} : {to: string, amount: n
             },
         },
     ]
+    // sign tx
     let bodyBytes = await signingClient.sign(accs[0].address, msgs, fee, "")
 
+    // construct payload with signed tx and broadcast it through API
     let payload = {
         tx_bytes: toBase64(TxRaw.encode(bodyBytes).finish()),
         mode: 'BROADCAST_MODE_SYNC'
