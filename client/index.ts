@@ -6,8 +6,8 @@ import { toBase64 } from '@cosmjs/encoding';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
 import axios from 'axios';
 
-const MNEMONIC="permit omit share float blind matrix soldier trust light author fly side lend you what happy multiply monster yard have similar outdoor other drama"
-const TO_ADDRESS="baby1wtdp8e3935mptdmd8ydq9n2qxxtdj4ut8gye5v"
+const MNEMONIC="suffer chief relax another post industry nose found style hawk mystery always salmon squirrel parrot edit other debate demise eager coast enjoy home foil"
+const TO_ADDRESS="baby1nsmx76y2de9vf5pjtqmn07xj5l8rrdp0mnefk6"
 
 const network = {
     provider: "http://localhost:2281",
@@ -73,7 +73,7 @@ async function sendTransaction ({ to, amount, mnemonic} : {to: string, amount: n
     try {
         let res = await sendTransaction({
             to: TO_ADDRESS,
-            amount: 1000000,
+            amount: 1000000000,
             mnemonic: MNEMONIC
         })
 
