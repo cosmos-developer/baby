@@ -88,8 +88,12 @@ toml set --toml-path $HOME/.baby/config/app.toml api.swagger true
 toml set --toml-path $HOME/.baby/config/app.toml api.enable true
 toml set --toml-path $HOME/.baby/config/app.toml api.address tcp://0.0.0.0:1310
 
+# create more test key
+babyd keys add test1 --keyring-backend $KEYRING --algo $KEYALGO
+
 # Allocate genesis accounts (cosmos formatted addresses)
 babyd add-genesis-account $KEY 1000000000000ubaby --keyring-backend $KEYRING
+babyd add-genesis-account test1 1000000000000ubaby --keyring-backend $KEYRING
 
 # Sign genesis transaction
 babyd gentx $KEY 1000000ubaby --keyring-backend $KEYRING --chain-id $CHAINID

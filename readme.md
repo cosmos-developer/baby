@@ -29,8 +29,8 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 
 3. Group 3: Interacting with a chain through API
 
-- Lesson 7: Making a transaction through API
-- Lesson 8: Making a query through API
+- [Lesson 7: Making a transaction through API](docs/chapter_3/lesson_7.md)
+- [Lesson 8: Making a query through API](docs/chapter_3/lesson_8.md)
 
 4. Group 4: Chain configuration
 
