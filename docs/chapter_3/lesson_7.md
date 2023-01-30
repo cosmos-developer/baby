@@ -21,6 +21,7 @@ To learn more, access "http://localhost:1310" and search for "/cosmos/tx/v1beta1
 
 ## Guidelines
 
+### Overview of sending a transaction through API
 the guide line here will follow [example code](../../client/index.ts)
 
 1. construct request send body
@@ -30,8 +31,17 @@ the guide line here will follow [example code](../../client/index.ts)
 2. sign tx
 3. construct payload with signed tx and broadcast it through API
 
+### Code run example
+from baby directory,
+
+1. bash scripts/test-node-deploy.sh --install
+2. cd client
+3. npm install
+4. npm run-script run
+5. query for balance of TO_ADDRESS in client/.env, should increase 1000000000ubaby
 
 ## Help videos
+https://youtu.be/hUInhQ4s1T4
 
 ## Homework
 1. rewrite the script and make a delegation transaction through API. Here is the structure for delegation message
