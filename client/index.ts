@@ -5,9 +5,8 @@ import { Coin } from 'cosmjs-types/cosmos/base/v1beta1/coin';
 import { toBase64 } from '@cosmjs/encoding';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
 import axios from 'axios';
-
-const MNEMONIC="suffer chief relax another post industry nose found style hawk mystery always salmon squirrel parrot edit other debate demise eager coast enjoy home foil"
-const TO_ADDRESS="baby1nsmx76y2de9vf5pjtqmn07xj5l8rrdp0mnefk6"
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 const network = {
     provider: "http://localhost:2281",
@@ -71,10 +70,19 @@ async function sendTransaction ({ to, amount, mnemonic} : {to: string, amount: n
 
 (async () => {
     try {
+        if (process.env.MNEMONIC == undefined) {
+            throw new Error("MNEMONIC is not defined")
+        }
+
+        if (process.env.TO_ADDRESS == undefined) {
+            throw new Error("TO_ADDRESS is not defined")
+        }
+
+        // will send 10^9 ubaby to TO_ADDRESS
         let res = await sendTransaction({
-            to: TO_ADDRESS,
+            to: process.env.TO_ADDRESS,
             amount: 1000000000,
-            mnemonic: MNEMONIC
+            mnemonic: process.env.MNEMONIC
         })
 
         console.log(res)

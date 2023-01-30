@@ -55,7 +55,7 @@ then
 else
     echo >&1 "installing babyd"
     rm -rf $HOME/.baby*
-    rm scripts/mnemonic.txt
+    rm client/.env
     make install
 fi
 
@@ -65,9 +65,11 @@ babyd config chain-id $CHAINID
 # determine if user wants to recorver or create new
 if [ $WILL_RECOVER -eq 0 ];
 then
-    babyd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --output json >> scripts/mnemonic.txt
+    MNEMONIC=$(babyd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --output json | jq -r '.mnemonic')
+    echo "MNEMONIC=$MNEMONIC" >> client/.env
 else
-    babyd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --recover
+    MNEMONIC=$(babyd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO --recover --output json | jq -r '.mnemonic')
+    echo "MNEMONIC=$MNEMONIC" >> client/.env
 fi
 
 echo >&1 "\n"
@@ -90,7 +92,8 @@ toml set --toml-path $HOME/.baby/config/app.toml api.enable true
 toml set --toml-path $HOME/.baby/config/app.toml api.address tcp://0.0.0.0:1310
 
 # create more test key
-babyd keys add test1 --keyring-backend $KEYRING --algo $KEYALGO --output json >> scripts/mnemonic.txt
+TO_ADDRESS=$(babyd keys add test1 --keyring-backend $KEYRING --algo $KEYALGO --output json | jq -r '.address')
+echo "TO_ADDRESS=$TO_ADDRESS" >> client/.env
 
 # Allocate genesis accounts (cosmos formatted addresses)
 babyd add-genesis-account $KEY 1000000000000ubaby --keyring-backend $KEYRING
