@@ -39,3 +39,5 @@ https://youtu.be/iC1Ca5JFnx4
 4. query balances of "test1" to make sure that it has received funds
 
 ![res3](images/query_bank_bal.png)
+
+5. query all validators `babyd q staking validators --node tcp://localhost:2281`
