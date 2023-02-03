@@ -73,7 +73,7 @@ else
 fi
 
 echo "MNEMONIC=$MNEMONIC" >> client/.env
-echo "MNEMONIC_0=$MNEMONIC" >> scripts/mnemonic.txt
+echo "MNEMONIC for $(babyd keys show $KEY -a --keyring-backend $KEYRING) = $MNEMONIC" >> scripts/mnemonic.txt
 
 echo >&1 "\n"
 
@@ -97,8 +97,8 @@ toml set --toml-path $HOME/.baby/config/client.toml node tcp://0.0.0.0:2281
 
 # create more test key
 MNEMONIC_1=$(babyd keys add test1 --keyring-backend $KEYRING --algo $KEYALGO --output json | jq -r '.mnemonic')
-echo "MNEMONIC_1=$MNEMONIC_1" >> scripts/mnemonic.txt
 TO_ADDRESS=$(babyd keys show test1 -a --keyring-backend $KEYRING)
+echo "MNEMONIC for $TO_ADDRESS = $MNEMONIC_1" >> scripts/mnemonic.txt
 echo "TO_ADDRESS=$TO_ADDRESS" >> client/.env
 
 # Allocate genesis accounts (cosmos formatted addresses)
