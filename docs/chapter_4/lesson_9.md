@@ -33,6 +33,7 @@ For app.toml, a beginner should only need to know about how to enable API server
 5. Browse: "localhost:1310" to check
 
 ## Help videos
+https://youtu.be/5r2zo5J-qCM
 
 ## Homework
 1. Change api server address in app.toml and browse it again to make sure that it is accessible
