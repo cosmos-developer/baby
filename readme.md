@@ -34,7 +34,7 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 
 4. Group 4: Chain configuration
 
-- [Lesson 9: Introduction to app.toml](docs/chapter_4/lesson_9.md)
+- [Lesson 9: Enable API server in app.toml](docs/chapter_4/lesson_9.md)
 - Lesson 10: Introduction to client.toml and "chaind config"
 - Lesson 11: Introduction to genesis.json (genesis_time, chain_id, consensus_params)
 - Lesson 12: Dive deeper into app_state module configuration (accounts, bank, staking)
