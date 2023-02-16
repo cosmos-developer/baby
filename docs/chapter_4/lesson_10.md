@@ -27,6 +27,7 @@ toml set --toml-path $HOME/.baby/config/client.toml node tcp://0.0.0.0:2281
 This will set rpc node to tcp://0.0.0.0:2281
 
 ## Help videos
+https://youtu.be/8n9e3NPFCvI
 
 ## Homework
 1. Halt the node and change chain-id to "cosmos-boyz", node to port 4567
