@@ -29,6 +29,7 @@ babyd tx staking create-validator --moniker localtestnet \
 * details
 * security-contact
 * website
+* identity: create identity here https://keybase.io/ (it's value should be something like this CBAA46CC575D45B6)
 
 3. commission group
 * commission-max-rate
