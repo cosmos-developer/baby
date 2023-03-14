@@ -3,14 +3,17 @@ Goal:
 
 # Lesson 11: Introduction to genesis.json
 
-genesis.json: Is a json file that defines the initial state of the chain, as block 0 of the chain. In this file, it will contain a lot of necessary information such as initialization time, important parameters like crisis, consensus param, bank, ...
+genesis.json: Is a json file that defines the initial state of the chain, as block 0 of the chain. This file will contain necessary information related to network identification (chain_id), consensus params, and parameter configuration for keepers.
 
 In this lesson, I will mention 3 information that is genesis_time, chain_id and consensus_param.
 
 ## Guidelines
 
-1. initialize a node
-2. try to find genesis.json in ~/.baby/config. Try to look for this paragraph
+1. initialize a node 
+```bash
+ scripts/test-node-deploy.sh --install
+```
+2. try to find genesis.json in ~/.baby/config. Look for this paragraph
 
 ![client configuration](images/genesis.png)
 
@@ -24,7 +27,7 @@ In this lesson, I will mention 3 information that is genesis_time, chain_id and 
 ```bash
  "chain_id": "baby-1",
 ```
-* consensus_param: defines consensus params.
+* consensus_param: defines consensus params for tendermint node. This will affect how Tendermint node behaves. In most case, this should be left alone.
 ```bash
  "block": "
       "max_bytes": "22020096",
@@ -32,7 +35,11 @@ In this lesson, I will mention 3 information that is genesis_time, chain_id and 
       "time_iota_ms": "1000"
     "
 ```
-Like you see, in field block, have three sub-params: max_byte (max numbers of byte / block ); max_gas: total gas in a block cannot exceed this limit (if u not setup, default's -1); time_iota_ms: minimum time increment between consecutive blocks (in milliseconds). 
+There are three sub-params in field "block":
+
+* max_byte (max numbers of byte / block )
+* max_gas: total gas in a block cannot exceed this limit (if not setup, default is -1)
+* time_iota_ms: minimum time increment between consecutive blocks (in milliseconds).
 
 ```bash
  "evidence": "
@@ -41,7 +48,7 @@ Like you see, in field block, have three sub-params: max_byte (max numbers of by
       "max_bytes": "1048576"
     "
 ```
-In field evidence, have three sub-params: max_age_num_blocks: defines the maximum number of blocks after which an evidence is not valid anymore. Ie. if its 1000, and we're at block 5000, only evidence since block 4000 will be considered valid  
+In field evidence, have three sub-params: max_age_num_blocks: defines the maximum number of blocks after which an evidence is not valid anymore. Ie. if its 1000, and we're at block 5000, only evidence since block 4000 will be considered valid 
 
 ```bash
 "validator": "
@@ -50,7 +57,15 @@ In field evidence, have three sub-params: max_age_num_blocks: defines the maximu
       ]
     "
 ```
-In field validator, just show type of publickey (ed25519), if you wanna understand it, read it.
+```bash
+babyd tendermint show-validator
+```  
+to see validator public key in ed25519. Each node will an unique validator public key.
+
+
 
 ## Homework
-1. Prepare for the following informative lessons by learning more about the remaining fields in the genesis.json file and understanding those fields
+1. Deploy a node with chain_id "lesson_11"
+2. Make a bank send transaction successfully
+![client configuration](images/tx_bank.png)
+
