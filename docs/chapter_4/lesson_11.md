@@ -10,9 +10,7 @@ In this lesson, I will mention 3 information that is genesis_time, chain_id and 
 ## Guidelines
 
 1. initialize a node 
-```bash
- scripts/test-node-deploy.sh --install
-```
+bash scripts/test-node-deploy.sh --install
 2. try to find genesis.json in ~/.baby/config. Look for this paragraph
 
 ![client configuration](images/genesis.png)
@@ -48,7 +46,11 @@ There are three sub-params in field "block":
       "max_bytes": "1048576"
     "
 ```
-In field evidence, have three sub-params: max_age_num_blocks: defines the maximum number of blocks after which an evidence is not valid anymore. Ie. if its 1000, and we're at block 5000, only evidence since block 4000 will be considered valid 
+There are three sub-params in field "evidence":
+
+* max_age_num_blocks: defines the maximum number of blocks after which an evidence is not valid anymore. Ie. if its 1000, and we're at block 5000, only evidence since block 4000 will be considered valid
+* max_age_duration: Max age of evidence, in time. It should correspond with an app's "unbonding period" or other similar mechanism for handling [Nothing-At-Stake attacks]. Read more at (https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed)
+* max_bytes: This sets the maximum size of total evidence in bytes that can be committed in a single block and should fall comfortably under the max block bytes. Default is 1048576 or 1MB
 
 ```bash
 "validator": "
