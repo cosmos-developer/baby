@@ -10,7 +10,9 @@ In this lesson, I will mention 3 information that is genesis_time, chain_id and 
 ## Guidelines
 
 1. initialize a node 
+```bash
 bash scripts/test-node-deploy.sh --install
+```
 2. try to find genesis.json in ~/.baby/config. Look for this paragraph
 
 ![client configuration](images/genesis.png)
