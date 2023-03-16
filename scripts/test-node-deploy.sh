@@ -1,7 +1,11 @@
 #!/bin/bash
 
 KEY="test"
-CHAINID="baby-1"
+# check if CHAINID is not defined
+if [ -z "$CHAINID" ];
+then
+    CHAINID="baby-1"
+fi
 KEYRING="test"
 MONIKER="localtestnet"
 KEYALGO="secp256k1"
@@ -11,12 +15,17 @@ LOGLEVEL="info"
 WILL_RECOVER=0
 WILL_INSTALL=0
 WILL_CONTINUE=0
+INITIALIZE_ONLY=0
 # $# is to check number of arguments
 if [ $# -gt 0 ];
 then
     # $@ is for getting list of arguments
     for arg in "$@"; do
         case $arg in
+        --initialize)
+            INITIALIZE_ONLY=1
+            shift
+            ;;
         --recover)
             WILL_RECOVER=1
             shift
@@ -113,6 +122,12 @@ babyd collect-gentxs
 
 # Run this to ensure everything worked and that the genesis file is setup correctly
 babyd validate-genesis
+
+# if initialize only, exit
+if [ $INITIALIZE_ONLY -eq 1 ];
+then
+    exit 0;
+fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
 babyd start --pruning=nothing --log_level $LOGLEVEL --minimum-gas-prices=0.0001ubaby --p2p.laddr tcp://0.0.0.0:2280 --rpc.laddr tcp://0.0.0.0:2281 --grpc.address 0.0.0.0:2282 --grpc-web.address 0.0.0.0:2283
