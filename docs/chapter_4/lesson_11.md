@@ -73,6 +73,9 @@ CHAINID="cosmos_boyz" bash scripts/test-node-deploy.sh --install --initialize
 bash scripts/test-node-deploy.sh --continue
 ```
 
+## Help videos
+https://youtu.be/ysOC97kxIuE
+
 ## Homework
 1. Deploy a node with chain_id "lesson_11" and initial_height=100
 2. Run the chain, the chain should start producing first block at 100
