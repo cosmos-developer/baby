@@ -1,19 +1,41 @@
 Goal:
-* Learners should understand more information about 3 modules in app_state(auth, bank, staking)
+* Learners should be able to add new account to auth, add initial balances to bank
 
 # Lesson 12: Dive deeper into app_state module configuration (auth, bank, staking)
 
-app.go: Is the place where all modules for blockchain operation are aggregated.   
-
-In this lesson, I will mention 3 modules that is auth, bank and stake.
+In this lesson, I will continue to introduce more important fields in the genesis.json file (auth, bank, staking).
 
 ## Guidelines
 
-1. Find app.go in ~/baby/app. Look for this paragraph and find the 3 imported modules at the top of the file including: auth, bank and staking. (reused from module 'x' of cosmos-sdk repository)
+1. initialize a node 
+bash scripts/test-node-deploy.sh --install
+2. try to find genesis.json in ~/.baby/config. Look for this paragraph
+3. app_state: defines the initial state of the state-machine.
 
-![client configuration](images/app_state.png)
+![client configuration](images/auth_genesis.png)
 
-2. The auth module is responsible for specifying the base transaction and account types for an application. Where all basic transaction validity checks(signatures, nonces, auxiliary fields) are performed and show the account keeper, which allows other modules to read, write, and modify accounts.
+* auth: in this field, we will take care of each field account 
+```bash
+"accounts": [
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "baby1u2rfz02pu7suyxv59h608hvyt2jngwpaya7rd2",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "baby1vyrukcrqa2chylvkf8crazjntyq0ppx9w5f5gh",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        }
+]
+```
+
+* Advance
+The auth module is responsible for specifying the base transaction and account types for an application. Where all basic transaction validity checks(signatures, nonces, auxiliary fields) are performed and show the account keeper, which allows other modules to read, write, and modify accounts.
 * Account: contain authentication information for a uniquely indentified external user of chain. Include public key, address and account number.
 
 ![client configuration](images/account_interface.png)
@@ -41,8 +63,11 @@ export interface ModuleAccount {
 
 And you can read and practice, you can try the module at https://github.com/cosmos/cosmos-sdk/tree/main/x/auth
 
-3. The bank module : there are two most important functions in this module, which are transaction execution and account balance.
+4. The bank module : there are two most important in this module, which are transaction execution and account balance.
 
+![client configuration](images/bank_field.png)
+
+* Advance
 * query account balance: bash babyd query bank balances [address] [flags] 
 
 ![client configuration](images/query_bank.png)
@@ -55,6 +80,9 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 4. The staking module: the module enables Cosmos SDK-based blockchain to support an advanced Proof-of-Stake (PoS) system. In this system, holders of the native staking token of the chain can become validators and can delegate tokens to validators, ultimately determining the effective validator set for the system.
 
+![client configuration](images/staking_field.png)
+
+* Advance
 * validators: allows users to query details about all validators on a network.
 
 bash babyd query staking validators [flags]
@@ -72,6 +100,5 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 ## Homework
 1. Deploy a node with chain_id "lesson_12"
-2. Query authentication accounts successfully
-3. Create, edit validator with module staking successfully
+2. Create new account and initial balances to bank successfull 
 
