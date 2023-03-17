@@ -34,7 +34,6 @@ bash scripts/test-node-deploy.sh --install
 ]
 ```
 
-* Advance
 The auth module is responsible for specifying the base transaction and account types for an application. Where all basic transaction validity checks(signatures, nonces, auxiliary fields) are performed and show the account keeper, which allows other modules to read, write, and modify accounts.
 * Account: contain authentication information for a uniquely indentified external user of chain. Include public key, address and account number.
 
@@ -67,7 +66,6 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 ![client configuration](images/bank_field.png)
 
-* Advance
 * query account balance: bash babyd query bank balances [address] [flags] 
 
 ![client configuration](images/query_bank.png)
@@ -82,7 +80,6 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 ![client configuration](images/staking_field.png)
 
-* Advance
 * validators: allows users to query details about all validators on a network.
 
 bash babyd query staking validators [flags]
