@@ -8,7 +8,7 @@ In this lesson, I will continue to introduce more important fields in the genesi
 ## Guidelines
 
 1. initialize a node 
-bash scripts/test-node-deploy.sh --install
+bash scripts/test-node-deploy.sh --install --initialize
 2. try to find genesis.json in ~/.baby/config. Look for this paragraph
 3. app_state: defines the initial state of the state-machine.
 
