@@ -3,18 +3,22 @@ Goal:
 
 # Lesson 12: Dive deeper into app_state module configuration (auth, bank, staking)
 
-In this lesson, I will continue to introduce more important fields in the genesis.json file (auth, bank, staking).
+In this lesson, I will talk about three fields in app_state (auth, bank, staking) in genesis.json.
+* app_state: defines the initial state of the state-machine.
+* auth: is responsible for specifying the base transaction and account types for an application. Where all basic transaction validity checks(signatures, nonces, auxiliary fields) are performed and show the account keeper, which allows other modules to read, write, and modify accounts.
+* base_account: defines a base account type. It contains all the necessary fields for basic account functionality. Any custom account type should extend this type for additional functionality (e.g. vesting)
+* bank: includes params and balances for account.
+* staking: holders of the native staking token of the chain can become validators and can delegate tokens to validators, ultimately determining the effective validator set for the system.
 
 ## Guidelines
 
 1. initialize a node 
 bash scripts/test-node-deploy.sh --install --initialize
 2. try to find genesis.json in ~/.baby/config. Look for this paragraph
-3. app_state: defines the initial state of the state-machine.
+3. There are three fields that you need to care about. Explaination is already in the file.
 
 ![client configuration](images/auth_genesis.png)
 
-* auth: in this field, we will take care of each field account 
 ```bash
 "accounts": [
         {
@@ -34,12 +38,11 @@ bash scripts/test-node-deploy.sh --install --initialize
 ]
 ```
 
-The auth module is responsible for specifying the base transaction and account types for an application. Where all basic transaction validity checks(signatures, nonces, auxiliary fields) are performed and show the account keeper, which allows other modules to read, write, and modify accounts.
 * Account: contain authentication information for a uniquely indentified external user of chain. Include public key, address and account number.
 
 ![client configuration](images/account_interface.png)
 
-* base_account: defines a base account type. It contains all the necessary fields for basic account functionality. Any custom account type should extend this type for additional functionality (e.g. vesting)
+
 ```bash
 export interface BaseAccount {
   address: string;
@@ -62,7 +65,7 @@ export interface ModuleAccount {
 
 And you can read and practice, you can try the module at https://github.com/cosmos/cosmos-sdk/tree/main/x/auth
 
-4. The bank module : there are two most important in this module, which are transaction execution and account balance.
+4. In this section, we will query account balances and transaction execution
 
 ![client configuration](images/bank_field.png)
 
@@ -76,11 +79,11 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 And you can read and practice, you can try the module at https://github.com/cosmos/cosmos-sdk/tree/main/x/bank
 
-4. The staking module: the module enables Cosmos SDK-based blockchain to support an advanced Proof-of-Stake (PoS) system. In this system, holders of the native staking token of the chain can become validators and can delegate tokens to validators, ultimately determining the effective validator set for the system.
+5. In this validator, we will query, create, edit validators and delegate token to validators.
 
 ![client configuration](images/staking_field.png)
 
-* validators: allows users to query details about all validators on a network.
+* validators: allows usephầnrs to query details about all validators on a network.
 
 bash babyd query staking validators [flags]
 
@@ -98,4 +101,7 @@ And you can read and practice, you can try the module at https://github.com/cosm
 ## Homework
 1. Deploy a node with chain_id "lesson_12"
 2. Create new account and initial balances to bank successfull 
+
+![client configuration](images/bank_field.png)
+
 
