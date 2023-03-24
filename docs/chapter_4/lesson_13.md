@@ -126,4 +126,3 @@ And you can read and practice, you can try the module at https://github.com/cosm
 1. Deploy a node with chain_id "lesson_12"
 2. Query validator commission rewards successfully
 ![client configuration](images/query_val_reward.png)
-
