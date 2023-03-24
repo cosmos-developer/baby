@@ -38,7 +38,7 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 - [Lesson 10: Introduction to client.toml](docs/chapter_4/lesson_10.md)
 - [Lesson 11: Introduction to genesis.json (genesis_time, chain_id, consensus_params)](docs/chapter_4/lesson_11.md)
 - [Lesson 12: Dive deeper into app_state module configuration (accounts, bank, staking)](docs/chapter_4/lesson_12.md)
-- Lesson 13: Dive deeper into app_state module configuration (mint, distribution, gov)
+- [Lesson 13: Dive deeper into app_state module configuration (mint, distribution, gov)](docs/chapter_4/lesson_13.md)
 
 5. Group 5: Setting up a validator
 
