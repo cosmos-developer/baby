@@ -1,5 +1,6 @@
 Goal: 
 *  Learner should understand three fields in genesis.json (mint, distribution, gov)
+*  Learner can check reward balances for validator address
 
 # Lesson 13: Dive deeper into app_state module configuration (mint, distribution, gov)
 
@@ -8,13 +9,6 @@ In this lesson, I will talk about three fields in app_state (mint, distribution,
 * mint: allow for a flexible inflation rate determined by market demand targeting a particular bonded-stake ratio and effect a balance between market liquidity and staked supply.
 * distribution: describes a functional way to passively distribute rewards between validators and delegators 
 * gov: handles all governance-related transactions 
-
-## Guidelines
-
-1. initialize a node 
-bash scripts/test-node-deploy.sh --install --initialize
-2. try to find genesis.json in ~/.baby/config. Look for this paragraph
-3. There are three fields that you need to care about. Explaination is already in the file.
 
 ![client configuration](images/mint_field.png)
 
@@ -121,6 +115,13 @@ In this 'gov' field:
 * veto_threshold: Maximum percentage NO_WITH_VETO votes for the result to be valid.
 
 And you can read and practice, you can try the module at https://github.com/cosmos/cosmos-sdk/tree/main/x/gov
+
+
+## Guidelines
+
+1. initialize a node 
+bash scripts/test-node-deploy.sh --install --initialize
+2. try to find genesis.json in ~/.baby/config. Look for 3 subfields named mint, distribution and gov in the app_state field
 
 ## Homework
 1. Deploy a node with chain_id "lesson_12"
