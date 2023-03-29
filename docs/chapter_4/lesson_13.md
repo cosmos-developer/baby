@@ -121,7 +121,7 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 1. initialize a node with field denom in gov = udaddy 
 ```bash
-cat $HOME/.baby/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="ubaby"' > $HOME/.baby/config/tmp_genesis.json && mv $HOME/.baby/config/tmp_genesis.json $HOME/.baby/config/genesis.json
+cat $HOME/.baby/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="udaddy"' > $HOME/.baby/config/tmp_genesis.json && mv $HOME/.baby/config/tmp_genesis.json $HOME/.baby/config/genesis.json
 ```
 2. check genesis.json in ~/.baby/config/genesis.json. gov field should be denom=udaddy
 
