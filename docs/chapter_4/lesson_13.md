@@ -119,11 +119,23 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 ## Guidelines
 
-1. initialize a node 
-bash scripts/test-node-deploy.sh --install --initialize
-2. try to find genesis.json in ~/.baby/config. Look for 3 subfields named mint, distribution and gov in the app_state field
+1. initialize a node with field denom in gov = udaddy 
+```bash
+cat $HOME/.baby/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="ubaby"' > $HOME/.baby/config/tmp_genesis.json && mv $HOME/.baby/config/tmp_genesis.json $HOME/.baby/config/genesis.json
+```
+2. check genesis.json in ~/.baby/config/genesis.json. gov field should be denom=udaddy
+
+![client configuration](images/denom_gov.png)
+
+3. Run the network
+```bash 
+scripts/test-node-deploy.sh --continue
+```
 
 ## Homework
-1. Deploy a node with chain_id "lesson_12"
+1. Deploy a node with field denom in mint = udaddy successfully
+
+![client configuration](images/log_udaddy.png)
+
 2. Query validator commission rewards successfully
 ![client configuration](images/query_val_reward.png)
