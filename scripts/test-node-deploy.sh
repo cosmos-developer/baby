@@ -1,6 +1,7 @@
 #!/bin/bash
 
 KEY="test"
+CHAINID="${CHAINID:-baby-1}"
 # check if CHAINID is not defined
 if [ -z "$CHAINID" ];
 then

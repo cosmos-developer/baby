@@ -12,7 +12,7 @@ In this lesson, I will talk about three fields in app_state (mint, distribution,
 
 ![client configuration](images/mint_field.png)
 
-In this 'mint' field:
+1. In this 'mint' field:
 
 ```bash
  "minter": {
@@ -31,7 +31,7 @@ In this 'mint' field:
         "inflation_min": "0.070000000000000000",
         "goal_bonded": "0.670000000000000000",
         "blocks_per_year": "6311520"
- }
+ }u
 ```
 * mint_denom: Denom of the staking token
 * inflation_rate_change: max yearly change in inflation
@@ -44,7 +44,7 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 ![client configuration](images/distribution_field.png)
 
-In this 'distribution' field:
+2. In this 'distribution' field:
 
 ```bash
 "params": {
@@ -69,7 +69,7 @@ And you can read and practice, you can try the module at https://github.com/cosm
 
 ![client configuration](images/gov_field.png)
 
-In this 'gov' field:
+3. In this 'gov' field:
 
 ```bash
       "starting_proposal_id": "1",
