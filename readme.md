@@ -42,7 +42,7 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 
 5. Group 5: Setting up a validator
 
-- Lesson 14: Setting up validator for new chain (add-genesis-account, tendermint, gentx, validate-genesis)
+- [Lesson 14: Setting up validator for new chain (add-genesis-account, tendermint, gentx, validate-genesis)](docs/chapter_5/lesson_14.md)
 - Lesson 15: Chapter 1 practice
 
 ## II. Chapter 2: Building a custom module
