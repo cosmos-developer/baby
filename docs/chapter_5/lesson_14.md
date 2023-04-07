@@ -56,3 +56,11 @@ babyd start
 
 ## Homework
 
+1. Create a script file for setting up validator for newchain with some information:
+- chainid: lesson_14
+- 3 keys: test, test1, test2 (add balances for all)
+- set validator for test2
+
+![client configuration](images/lesson14.png)
+
+
