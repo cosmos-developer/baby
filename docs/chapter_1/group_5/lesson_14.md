@@ -62,5 +62,3 @@ babyd start
 - set validator for test2
 
 ![client configuration](images/lesson14.png)
-
-
