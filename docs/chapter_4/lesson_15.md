@@ -1,0 +1,1 @@
+redirect to [testnet homework](../../specs/testnet_spec.md)
