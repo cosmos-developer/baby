@@ -41,8 +41,7 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 - [Lesson 13: Dive deeper into app_state module configuration (mint, distribution, gov)](docs/chapter_4/lesson_13.md)
 
 5. Group 5: Setting up a validator
-
-- Lesson 14: Setting up validator for new chain (add-genesis-account, tendermint, gentx, validate-genesis)
+- [Lesson 14: Setting up validator for new chain (add-genesis-account, tendermint, gentx, validate-genesis)](docs/chapter_5/lesson_14.md)
 - [Lesson 15: Chapter 1 practice](docs/chapter_4/lesson_15.md)
 
 ## II. Chapter 2: Building a custom module

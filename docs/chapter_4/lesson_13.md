@@ -31,7 +31,7 @@ In this lesson, I will talk about three fields in app_state (mint, distribution,
         "inflation_min": "0.070000000000000000",
         "goal_bonded": "0.670000000000000000",
         "blocks_per_year": "6311520"
- }u
+ }
 ```
 * mint_denom: Denom of the staking token
 * inflation_rate_change: max yearly change in inflation
