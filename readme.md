@@ -72,3 +72,7 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 5. Group 5: Capstone project
 - Lesson 14: Practice building a simple text module part 1
 - Lesson 15: Practice building a simple text module part 2
+
+# III. Chapter 3: Building CosmWasm contracts
+1. Group 1: Basic setup
+- Lesson 1: CosmWasm introduction
