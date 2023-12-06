@@ -64,14 +64,15 @@ Purpose: Chain interaction serves as cornerstone in helping a person get familia
 3. Group 3: Testing
 - Lesson 10: Add unit testing
 - Lesson 11: Add system testing
+- Lesson 12: Linting
   
 4. Group 4: Scripts
-- Lesson 12: start node and local-net script
-- Lesson 13: development script in Makefile
+- Lesson 13: start node and local-net script
+- Lesson 14: development script in Makefile
   
 5. Group 5: Capstone project
-- Lesson 14: Practice building a simple text module part 1
-- Lesson 15: Practice building a simple text module part 2
+- Lesson 15: Practice building a simple text module part 1
+- Lesson 16: Practice building a simple text module part 2
 
 # III. Chapter 3: Building CosmWasm contracts
 1. Group 1: Basic setup

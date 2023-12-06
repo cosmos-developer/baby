@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/simapp"
-	"github.com/ignite-hq/cli/ignite/pkg/cosmoscmd"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
@@ -20,7 +19,7 @@ func New(isCheckTx bool) *app.App {
 	db := tmdb.NewMemDB()
 	logger := log.NewNopLogger()
 
-	encoding := cosmoscmd.MakeEncodingConfig(app.ModuleBasics)
+	encoding := app.MakeEncodingConfig()
 
 	a := app.New(logger, db, nil, true, map[int64]bool{}, app.DefaultNodeHome, 0, encoding, simapp.EmptyAppOptions{})
 	// InitChain updates deliverState which is required when app.NewContext is called
@@ -37,7 +36,7 @@ func New(isCheckTx bool) *app.App {
 		})
 	}
 
-	return a.(*app.App)
+	return a
 }
 
 var defaultConsensusParams = &abci.ConsensusParams{

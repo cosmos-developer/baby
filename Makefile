@@ -84,7 +84,24 @@ install: go.sum
 	go install -mod=readonly $(BUILD_FLAGS) ./...
 
 build:
-	go build $(BUILD_FLAGS) -o bin/babyd ./cmd/babyd
+	go build -mod=readonly $(BUILD_FLAGS) -o build/babyd ./cmd/babyd
+
+
+.PHONY: all install build
+
+###############################################################################
+###                           Tests & Simulation                            ###
+###############################################################################
+
+test: test-unit
+
+test-unit:
+	@VERSION=$(VERSION) go test -mod=readonly -tags='ledger test_ledger_mock' ./...
+
+benchmark:
+	@go test -mod=readonly -bench=. ./...
+
+.PHONY: test test-all test-cover test-unit test-race
 
 ###############################################################################
 ###                                  Proto                                  ###
