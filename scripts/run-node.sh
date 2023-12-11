@@ -17,7 +17,6 @@ BINARY="build/babyd"
 # retrieve all args
 WILL_RECOVER=0
 # default running will install new node binary and start new instance
-WILL_INSTALL=1
 WILL_CONTINUE=0
 INITIALIZE_ONLY=0
 # $# is to check number of arguments
@@ -32,10 +31,6 @@ then
             ;;
         --recover)
             WILL_RECOVER=1
-            shift
-            ;;
-        --install)
-            WILL_INSTALL=1
             shift
             ;;
         --continue)
@@ -58,21 +53,35 @@ then
 fi
 
 # validate dependencies are installed
-command -v jq > /dev/null 2>&1 || { echo >&2 "jq not installed. More info: https://stedolan.github.io/jq/download/"; exit 1; }
-command -v toml > /dev/null 2>&1 || { echo >&2 "toml not installed. More info: https://github.com/mrijken/toml-cli"; exit 1; }
+if ! command -v jq &> /dev/null; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        brew install jq
+    else
+        sudo apt-get install -y jq
+    fi
+fi
+
+SED_BINARY=sed
+# check if this is OS X
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # check if gsed is installed
+    if ! command -v gsed &> /dev/null; then
+        brew install gnu-sed
+    fi
+
+    SED_BINARY=gsed
+fi
 
 # install babyd if not exist
-if [ $WILL_INSTALL -eq 0 ];
-then 
-    command -v build/babyd > /dev/null 2>&1 || { echo >&1 "installing babyd"; make build; }
-else
-    echo >&1 "installing babyd"
-    rm -rf $NODE_HOME
-    rm -rf build/babyd 2> /dev/null
-    rm client/.env
-    rm scripts/mnemonic.txt
+# check if babyd is installed
+if ! command -v build/babyd &> /dev/null; then
+    echo "installing babyd"
     make build
 fi
+
+rm -rf $NODE_HOME
+rm client/.env
+rm scripts/mnemonic.txt
 
 $BINARY config keyring-backend $KEYRING --home $NODE_HOME
 $BINARY config chain-id $CHAINID --home $NODE_HOME
@@ -89,8 +98,6 @@ fi
 echo "MNEMONIC=$MNEMONIC" >> client/.env
 echo "MNEMONIC for $($BINARY keys show $KEY -a --keyring-backend $KEYRING --home $NODE_HOME) = $MNEMONIC" >> scripts/mnemonic.txt
 
-echo >&1 "\n"
-
 # init chain
 $BINARY init $MONIKER --chain-id $CHAINID --home $NODE_HOME
 
@@ -104,10 +111,10 @@ cat $NODE_HOME/config/genesis.json | jq '.app_state["mint"]["params"]["mint_deno
 # cat $NODE_HOME/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="10000000"' > $NODE_HOME/config/tmp_genesis.json && mv $NODE_HOME/config/tmp_genesis.json $NODE_HOME/config/genesis.json
 
 # enable rest server and swagger
-toml set --toml-path $NODE_HOME/config/app.toml api.swagger true
-toml set --toml-path $NODE_HOME/config/app.toml api.enable true
-toml set --toml-path $NODE_HOME/config/app.toml api.address tcp://0.0.0.0:1310
-toml set --toml-path $NODE_HOME/config/client.toml node tcp://0.0.0.0:2281
+$SED_BINARY -i '0,/enable = false/s//enable = true/' $NODE_HOME/config/app.toml
+$SED_BINARY -i 's/swagger = false/swagger = true/' $NODE_HOME/config/app.toml
+$SED_BINARY -i 's/address = "tcp:\/\/0\.0\.0\.0:1310"/address = "tcp:\/\/0\.0\.0\.0:1310"/' $NODE_HOME/config/app.toml
+$SED_BINARY -i 's/node = "tcp:\/\/localhost:26657"/node = "tcp:\/\/0\.0\.0\.0:2281"/' $NODE_HOME/config/client.toml
 
 # create more test key
 MNEMONIC_1=$($BINARY keys add test1 --keyring-backend $KEYRING --algo $KEYALGO --output json --home $NODE_HOME | jq -r '.mnemonic')

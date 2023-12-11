@@ -138,7 +138,7 @@ func SetupWithGenesisValSet(t *testing.T, valSet *tmtypes.ValidatorSet, genAccs 
 
 func setup(withGenesis bool, invCheckPeriod uint) (*app.App, app.GenesisState) {
 	db := dbm.NewMemDB()
-	encCdc := appparams.MakeEncodingConfig()
+	encCdc := app.MakeEncodingConfig()
 
 	newApp := app.New(
 		log.NewNopLogger(),
