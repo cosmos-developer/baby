@@ -18,7 +18,7 @@ client.toml: configuration for client CLI interaction
 * keyring-backend
 * node
 
-4. Change it like in [test-node-deploy.sh](../../scripts/test-node-deploy.sh)
+4. Change it like in [run-node.sh](../../scripts/run-node.sh)
 
 ```bash
 toml set --toml-path $HOME/.baby/config/client.toml node tcp://0.0.0.0:2281

@@ -129,7 +129,7 @@ cat $HOME/.baby/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["m
 
 3. Run the network
 ```bash 
-scripts/test-node-deploy.sh --continue
+scripts/run-node.sh --continue
 ```
 
 ## Homework

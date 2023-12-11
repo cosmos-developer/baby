@@ -9,7 +9,7 @@ Browse 'http://localhost:1310' to learn more about query services
 ## Guidelines
 Query helps you to query information on chain or for debugging
 
-1. start a baby node `bash scripts/test-node-deploy.sh --install`
+1. start a baby node `bash scripts/run-node.sh --install`
 2. make a transaction through CLI
  * babyd tx bank send test $(babyd keys show test1 -a --keyring-backend test) 500000ubaby --fees 30ubaby -y --node tcp://localhost:2281
 3. query balances of receiver through API

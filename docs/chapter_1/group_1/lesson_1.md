@@ -58,4 +58,4 @@ https://youtu.be/9a3Xq8VDW3Y
 
 ![result](images/1_1.png "result of a chain running")
 
-4. For quick node deploy in baby chain repo: bash scripts/test-node-deploy.sh
+4. For quick node deploy in baby chain repo: bash scripts/run-node.sh

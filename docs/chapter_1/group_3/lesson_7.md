@@ -34,7 +34,7 @@ the guide line here will follow [example code](../../client/index.ts)
 ### Code run example
 from baby directory,
 
-1. bash scripts/test-node-deploy.sh --install
+1. bash scripts/run-node.sh --install
 2. cd client
 3. npm install
 4. npm run-script run

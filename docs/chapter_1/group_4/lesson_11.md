@@ -63,14 +63,14 @@ In this lesson, I will mention 3 information that is genesis_time, chain_id and 
 
 1. initialize a node with chain_id = cosmos_boyz
 ```bash
-CHAINID="cosmos_boyz" bash scripts/test-node-deploy.sh --install --initialize
+CHAINID="cosmos_boyz" bash scripts/run-node.sh --install --initialize
 ```
 
 2. check genesis.json in ~/.baby/config/genesis.json. chain_id field should be cosmos_boyz
 
 3. Run the network
 ```bash
-bash scripts/test-node-deploy.sh --continue
+bash scripts/run-node.sh --continue
 ```
 
 ## Help videos

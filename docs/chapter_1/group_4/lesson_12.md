@@ -22,7 +22,7 @@ In this lesson, I will talk about three fields in app_state (auth, bank, staking
 1. Initialize a node
 
 ```bash 
-scripts/test-node-deploy.sh --install --initialize
+scripts/run-node.sh --install --initialize
 ```
 
 2. Try to find genesis.json in ~/.baby/config. If genesis.json is configured correctly, information should be queryable.

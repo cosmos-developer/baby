@@ -26,7 +26,7 @@ For app.toml, a beginner should only need to know about how to enable API server
 * address
 * enabled-unsafe-cors
 
-4. Change it like in [test-node-deploy.sh](../../scripts/test-node-deploy.sh)
+4. Change it like in [run-node.sh](../../scripts/run-node.sh)
 
 ![config in script](images/config_in_script.png)
 
