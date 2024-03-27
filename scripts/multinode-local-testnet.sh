@@ -2,6 +2,12 @@
 rm -rf $HOME/.baby/
 killall screen
 
+# check if babyd is installed
+if ! [ -x "$(command -v babyd)" ]; then
+  echo 'Error: babyd is not installed.' >&2
+  make install
+fi
+
 # start a testnet
 babyd testnet --keyring-backend=test
 
